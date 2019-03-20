@@ -1,0 +1,104 @@
+Influxdb("TKS_TCUpgrade_CM_WS_L9AddOfferLogical",0);
+errorDesc("TKS_TCUpgrade_CM_WS_L9AddOfferLogical",lr_eval_string("{data}"),lr_eval_string("{c_errdesc}"),lr_eval_string("{c_errdesc1}"));
+
+Influxdb(char *name,int trx)
+{
+	
+	totalTime = lr_get_transaction_duration(name); 		//get response time of transaction 'name'
+	
+	thinkTime = lr_get_transaction_think_time(name);		//get thinktime of transaction 'name'
+		
+	wastedTime =  lr_get_transaction_wasted_time(name);		//get wasted time of transaction 'name'
+	
+	responseTime = totalTime - thinkTime - wastedTime;		// substracting thinktime and wasted time to calculate actual response time
+	
+	
+	sprintf( rt, "%1.2f", responseTime );					// save response time into varible rt
+	
+	lr_save_string( rt, "temp2" );							// save value of response time into LR parameter 'temp2'
+	
+	lr_save_string(name,"temp");  							// save transaction name into LR parameter 'temp' 
+
+	if(trx==1)
+		lr_save_string("Pass", "temp3");
+	else
+		lr_save_string("Fail", "temp3");
+
+	
+	web_custom_request("web_custom_request",
+		"URL=http://10.74.144.10:8086/write?consistency=all&db=tkslr&precision=ns&rp=",
+		"Method=POST",
+		"TargetFrame=",
+		"Resource=0",
+		"Referer=",
+		"Snapshot=t5.inf",
+		"Body=vugen_stats,transaction_name={temp} response_time={temp2},Status=\"{temp3}\"",
+		LAST);
+
+
+	return 0;
+}
+
+
+
+errorDesc(char *name,char *msisdn,char *response,char *response1)
+{
+	char newresponse[1000];
+	strcpy(newresponse,response);
+	strcat(newresponse,response1);
+	lr_save_string( msisdn, "temp6" );                                                                                                            
+	lr_save_string(name,"temp"); 
+	solution2 (newresponse, "\n","","pNewValue1");
+	
+	solution2 (lr_eval_string("{pNewValue1}")," ","\\ ",     "pNewValue2");
+	
+	solution2 (lr_eval_string("{pNewValue2}"),"\=","\\=",     "pNewValue3");
+		
+	solution2 (lr_eval_string("{pNewValue3}"), ",",   "\\,",     "temp7");
+	
+	if (strstr(lr_eval_string("{temp7}"), "ConcurrentModificationException") != NULL) {
+  
+    lr_save_string("java.util.ConcurrentModificationException;\\ nested\\ exception\\ is:\\ java.util.ConcurrentModificationException", "temp7");
+	}
+	
+	
+	web_custom_request("web_custom_request",
+		"URL=http://10.74.144.10:8086/write?consistency=all&db=tkslr&precision=ns&rp=",
+		"Method=POST",
+		"TargetFrame=",
+		"Resource=0",
+		"Referer=",
+		"Snapshot=t6.inf",
+		"Body=vugen_err,Transaction_name={temp},ErrDesc={temp7} Data={temp6}",
+		LAST);
+	
+	return 0;
+}
+
+
+void solution2 (char *strSource, char *strFrom, char *strTo, char *strParam)
+{
+    char strTemp[1024];
+    char *s = (char*)strSource;
+    int i=0;
+    int iLenFrom = strlen (strFrom);
+    int iLenTo   = strlen (strTo);
+ 
+    while (*s)
+    {
+        if (strncmp (s, strFrom, iLenFrom) == 0)
+        {
+            strncpy (&(strTemp[i]), strTo, iLenTo);
+            i += iLenTo;
+            s += iLenFrom;
+        }
+        else
+        {
+            strTemp[i++] = *s;
+            s++;
+        }
+    }
+    strTemp[i] = 0;
+ 
+    lr_save_string (strTemp, strParam);
+}
