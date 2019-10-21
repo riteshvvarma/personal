@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.1.1 r1855137">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">2</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration">10</stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <com.ubikingenierie.jmeter.plugin.hls.sampler.HLSSampler guiclass="com.ubikingenierie.jmeter.plugin.hls.gui.HLSSamplerGUI" testclass="com.ubikingenierie.jmeter.plugin.hls.sampler.HLSSampler" testname="AajTakTest" enabled="true">
+          <stringProp name="ULP_HLSSampler.url">https://vidcdn.vidgyor.com/at-origin/liveabr/at-origin/live1/chunks.m3u8</stringProp>
+          <stringProp name="ULP_HLSSampler.max_waiting_time">-1</stringProp>
+          <stringProp name="ULP_HLSSampler.max_bandwidth">17179869183</stringProp>
+          <stringProp name="ULP_HLSSampler.ip_spoofing_host"></stringProp>
+          <stringProp name="ULP_HLSSampler.max_connect_timeout"></stringProp>
+          <stringProp name="ULP_HLSSampler.max_read_timeout"></stringProp>
+          <stringProp name="ULP_HLSSampler.stream_type">AUTO</stringProp>
+        </com.ubikingenierie.jmeter.plugin.hls.sampler.HLSSampler>
+        <hashTree>
+          <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <url>true</url>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <url>true</url>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+          <BackendListener guiclass="BackendListenerGui" testclass="BackendListener" testname="Backend Listener" enabled="true">
+            <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" enabled="true">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="influxdbMetricsSender" elementType="Argument">
+                  <stringProp name="Argument.name">influxdbMetricsSender</stringProp>
+                  <stringProp name="Argument.value">org.apache.jmeter.visualizers.backend.influxdb.HttpMetricsSender</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="influxdbUrl" elementType="Argument">
+                  <stringProp name="Argument.name">influxdbUrl</stringProp>
+                  <stringProp name="Argument.value">http://18.191.105.33:8086/write?db=jmeter</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="application" elementType="Argument">
+                  <stringProp name="Argument.name">application</stringProp>
+                  <stringProp name="Argument.value">AajTakTest</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="measurement" elementType="Argument">
+                  <stringProp name="Argument.name">measurement</stringProp>
+                  <stringProp name="Argument.value">jmeter</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="summaryOnly" elementType="Argument">
+                  <stringProp name="Argument.name">summaryOnly</stringProp>
+                  <stringProp name="Argument.value">true</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="samplersRegex" elementType="Argument">
+                  <stringProp name="Argument.name">samplersRegex</stringProp>
+                  <stringProp name="Argument.value">.*</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="percentiles" elementType="Argument">
+                  <stringProp name="Argument.name">percentiles</stringProp>
+                  <stringProp name="Argument.value">90;95;99</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="testTitle" elementType="Argument">
+                  <stringProp name="Argument.name">testTitle</stringProp>
+                  <stringProp name="Argument.value">AajTakTest</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="eventTags" elementType="Argument">
+                  <stringProp name="Argument.name">eventTags</stringProp>
+                  <stringProp name="Argument.value"></stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="classname">org.apache.jmeter.visualizers.backend.influxdb.InfluxdbBackendListenerClient</stringProp>
+          </BackendListener>
+          <hashTree/>
+        </hashTree>
+        <JSR223Listener guiclass="TestBeanGUI" testclass="JSR223Listener" testname="JSR223 Listener" enabled="true">
+          <stringProp name="scriptLanguage">groovy</stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="cacheKey">true</stringProp>
+          <stringProp name="script">import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.util.EntityUtils; 
+
+void PostMeasurement(String metric) {
+
+
+    def httpclient = new DefaultHttpClient(new BasicHttpParams());
+
+    def httpPost = new HttpPost();
+
+ 
+
+    //URL format : http://[ipaddress]:[port]/write?db=[database &lt;http://[ipaddress]:[port]/write?db=%5bdatabase&gt; ]
+
+ 
+
+    httpPost.setURI(new URI(&quot;http://18.191.105.33:8086/write?db=jmeter&quot;));
+
+    log.info(&quot;Result : &quot; + metric);
+
+    httpPost.setEntity(new StringEntity(metric));
+
+    HttpResponse response = httpclient.execute(httpPost);
+
+    EntityUtils.consumeQuietly(response.getEntity());
+
+ 
+
+}
+
+ 
+
+ 
+
+result = new StringBuilder();
+
+ 
+
+status = &quot;Failure&quot;;
+
+if (sampleResult.isSuccessful())
+
+    status = &quot;Success&quot;;
+
+ 
+
+log.info(&quot;For testing purposes JSR223 Started&quot;);
+
+responseMessage=sampleResult.getResponseMessage();
+
+//log.info(responseMessage);
+
+responseSplit=responseMessage.split(&apos;,&apos;);
+
+ 
+
+//Expected format to post the result
+
+//samples,label=lbl,status=status count=count,duration=duration,responsecode=rc timestamp
+
+ 
+
+//Get SampleResult Label
+
+            resultName=sampleResult.getSampleLabel();
+
+            //resultName=&quot;Test&quot;; 
+
+            
+
+           //Get sentBytes 2
+                       sentBytes=(responseSplit[2].findAll(/\d+/)); //For Integers
+           // Get receivedBytes 3
+                       receivedBytes=(responseSplit[3].findAll(/\d+/)); //For Integers
+           // Get timeToPlay 4
+                       timeToPlay=(responseSplit[4].findAll(/\d+/)); //For Integers
+           // Get playedTimeSeconds 5
+                       playedTimeSeconds=(responseSplit[5].findAll(/\d+\.\d+/)); //For Decimals
+           // Get downloadTime 6
+                       downloadTime=(responseSplit[6].findAll(/\d+/)); //For Integers
+           // Get connectTime 7
+                       connectTime=(responseSplit[7].findAll(/\d+/)); //For Integers
+           // Get lagTime
+                       lagTime=(responseSplit[8].findAll(/\d+/)); //For Integers
+           // Get bufferFillTime
+                       bufferFillTime=(responseSplit[9].findAll(/\d+/)); //For Integers
+           // Get lagRatio
+                       lagRatio=(responseSplit[10].findAll(/\d+\.\d+/));; //For Decimals
+           // Get numberOfRequests
+                       numberOfRequests=(responseSplit[11].findAll(/\d+/)); //For Integers
+           // Get bitrate
+                       bitrate=(responseSplit[12].findAll(/\d+\.\d+/)); //For Decimals
+
+            
+
+                       //int pausetime=Integer.parseInt(lagTime[0])-Integer.parseInt(bufferFillTime[0]);
+
+            
+
+                       //log.info(pausetime); 
+
+                       
+
+                       result.append(&quot;Videostream,&quot;) //samples is the table name in InfluxDB which we will create at run time.
+
+                           .append(&quot;resultName=&quot;)
+
+                           .append(resultName)
+
+                           .append(&quot; &quot;)
+
+                           .append(&quot;sentBytes=&quot;)
+
+                           .append(sentBytes[0])
+
+                           .append(&quot;,receivedBytes=&quot;)
+
+                           .append(receivedBytes[0])
+
+                           .append(&quot;,timeToPlay=&quot;)
+
+                           .append(timeToPlay[0])
+
+                           .append(&quot;,playedTimeSeconds=&quot;)
+
+                           .append(playedTimeSeconds[0])
+
+                           .append(&quot;,downloadTime=&quot;)
+
+                           .append(downloadTime[0])
+
+                           .append(&quot;,connectTime=&quot;)
+
+                           .append(connectTime[0])
+
+                           .append(&quot;,lagTime=&quot;)
+
+                           .append(lagTime[0])
+
+                           .append(&quot;,bufferFillTime=&quot;)
+
+                           .append(bufferFillTime[0])
+
+                           .append(&quot;,lagRatio=&quot;)
+
+                           .append(lagRatio[0])
+
+                           .append(&quot;,numberOfRequests=&quot;)
+
+                           .append(numberOfRequests[0])
+
+                           .append(&quot;,bitrate=&quot;)
+
+                           .append(bitrate[0]);
+
+                          // .append(&quot;,pausetime=&quot;)
+
+                           //.append(pausetime);
+
+                        
+
+                       PostMeasurement(result.toString()); 
+                       log.info(result.toString());</stringProp>
+        </JSR223Listener>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
